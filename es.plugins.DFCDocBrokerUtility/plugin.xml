@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="es.plugins.dfcdocbrokerutility.preferences.DFCDocBrokerUtilityPreferencePage"
+            id="es.plugins.dfcdocbrokerutility.preferences.DFCDocBrokerUtilityPreferencePage"
+            name="DFCDocBrokerUtility Preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="es.plugins.dfcdocbrokerutility.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+      		adaptable="true"
+            id="es.plugins.DFCDocBrokerUtility.contribution1"
+            objectClass="com.emc.ide.project.IDmProject">
+         <menu
+               id="es.plugins.DFCDocBrokerUtility.menu1"
+               label="DFC DocBroker Utility"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="es.plugins.dfcdocbrokerutility.popup.actions.DocBrokerPrefsAction"
+               enablesFor="1"
+               icon="icons/prop_ps.gif"
+               id="es.plugins.DFCDocBrokerUtility.DocBrokerPrefsAction"
+               label="DocBroker Utility Preferences"
+               menubarPath="es.plugins.DFCDocBrokerUtility.menu1/group1">
+         </action>            
+         <action
+               class="es.plugins.dfcdocbrokerutility.popup.actions.ChangeDocBrokerAction"
+               enablesFor="1"
+               icon="icons/documentum.gif"
+               id="es.plugins.DFCDocBrokerUtility.ChangeDocBrokerAction"
+               label="Change DocBroker"
+               menubarPath="es.plugins.DFCDocBrokerUtility.menu1/group1">
+         </action>      
+      </objectContribution>
+   </extension>
+
+</plugin>
