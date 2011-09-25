@@ -47,5 +47,24 @@
          </action>      
       </objectContribution>
    </extension>
-
+   <extension point="org.eclipse.ui.startup">
+		<startup class="es.plugins.dfcdocbrokerutility.StartupClass"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="es.plugins.DFCDocBrokerUtility.actionSet"
+            label="DFC DocBroker Utility ToolBar"
+            visible="true">
+         <action
+               class="es.plugins.dfcdocbrokerutility.actions.ToolBarAction"
+               icon="icons/documentum.gif"
+               id="es.plugins.dfcdocbrokerutility.actions.ToolBarAction"
+               label="&amp;ToolBar Action"
+               style="pulldown"
+               toolbarPath="org.eclipse.wst.xml.ui.design.DesignToolBar"
+               tooltip="DFCDocBrokerUtility">
+         </action>
+      </actionSet>
+   </extension>
 </plugin>

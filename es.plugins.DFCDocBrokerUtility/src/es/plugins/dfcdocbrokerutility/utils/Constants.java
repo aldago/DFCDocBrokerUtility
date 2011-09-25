@@ -16,6 +16,9 @@ public final class Constants {
 	public final static String fileRef="file:";
 	public final static String docbrokerHost="dfc.docbroker.host[0]";
 	public final static String docbrokerPort="dfc.docbroker.port[0]";
+	public final static String globalRegRepository="dfc.globalregistry.repository";
+	public final static String globalRegUsername="dfc.globalregistry.username";
+	public final static String globalRegPassword="dfc.globalregistry.password";
 	public final static String defaultPort="1489";
 	public final static String propKey="DocBrokerList";
 	
@@ -24,8 +27,12 @@ public final class Constants {
 	
 	public final static String lblHost="Host";
 	public final static String lblPort="Port";
+	public final static String lblGlobalRegRepository="Global Registry Repository";
+	public final static String lblGlobalRegUsername="Global Registry Username";
+	public final static String lblGlobalRegPassword="Global Registry Password";
 	
 	public final static String docbrokerWizardTitle="Add new Docbroker";
 	public final static String docborkerWizardDesc="Set Docbroker Host and Port";
 	
+	public final static String statusBarHostPrefix="Using Host: ";
 }

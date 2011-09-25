@@ -33,19 +33,25 @@ public class ChangeDocBrokerAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		String vals=DFCDocBrokerUtils.getProps();
+		try{
+			String vals=DFCDocBrokerUtils.getProps();
+			
+			ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, new LabelProvider());
+			dialog.setTitle(Constants.elementListTitle);
+			dialog.setMessage(Constants.elementListMsg);
+			dialog.setElements(vals.split(Constants.docbrokerListToken));
+			int closed=dialog.open();
+			
+			if (closed==0){
+				DFCDocBrokerUtils.writeDFCprops((String)dialog.getResult()[0]);
+			}
+	
+			DFCDocBrokerUtils.writeStatusBarMsg(Constants.statusBarHostPrefix+(String)dialog.getResult()[0]);
+		}catch (Exception e){
 		
-		ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, new LabelProvider());
-		dialog.setTitle(Constants.elementListTitle);
-		dialog.setMessage(Constants.elementListMsg);
-		dialog.setElements(vals.split(Constants.docbrokerListToken));
-		int closed=dialog.open();
-		
-		if (closed==0){
-			DFCDocBrokerUtils.writeDFCprops((String)dialog.getResult()[0]);
 		}
 	}
-
+	
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */

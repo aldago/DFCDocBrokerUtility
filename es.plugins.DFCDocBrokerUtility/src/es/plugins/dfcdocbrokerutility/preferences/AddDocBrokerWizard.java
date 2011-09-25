@@ -49,8 +49,16 @@ public class AddDocBrokerWizard extends Wizard implements INewWizard{
 			}else{
 				docbroker=addPage.getHostText()+Constants.docbrokerToken+Constants.defaultPort;
 			}
+			String globalRegistry=null;
+			if (addPage.getGlobalRegUsernameText().length()>0 && addPage.getGlobalRegUsernameText().length()>0 && addPage.getGlobalRegPasswordText().length()>0){
+				globalRegistry=addPage.getGlobalRegRepositoryText()+Constants.docbrokerToken+addPage.getGlobalRegUsernameText()+Constants.docbrokerToken+addPage.getGlobalRegPasswordText();
+			}
 			IPreferenceStore store=Activator.getDefault().getPreferenceStore();
-			store.setValue(Constants.P_DOCBROKERS,listItems+Constants.docbrokerListToken+docbroker);
+			if (globalRegistry!=null){
+				store.setValue(Constants.P_DOCBROKERS,listItems+Constants.docbrokerListToken+docbroker+Constants.docbrokerToken+globalRegistry);
+			}else{
+				store.setValue(Constants.P_DOCBROKERS,listItems+Constants.docbrokerListToken+docbroker);
+			}
 		}
 		return true;
 	}

@@ -18,6 +18,9 @@ import es.plugins.dfcdocbrokerutility.utils.Constants;
 public class AddDocBrokerEntryPage extends WizardPage implements Listener{
 	private Text portText;
 	private Text hostText;
+	private Text globalRegRepositoryText;
+	private Text globalRegUsernameText;
+	private Text globalRegPasswordText;
 	
 	protected String getPortText(){
 		return this.portText.getText();
@@ -25,6 +28,18 @@ public class AddDocBrokerEntryPage extends WizardPage implements Listener{
 	
 	protected String getHostText(){
 		return this.hostText.getText();
+	}
+	
+	protected String getGlobalRegRepositoryText(){
+		return this.globalRegRepositoryText.getText();
+	}
+
+	protected String getGlobalRegUsernameText(){
+		return this.globalRegUsernameText.getText();
+	}
+	
+	protected String getGlobalRegPasswordText(){
+		return this.globalRegPasswordText.getText();
 	}
 	
 	public AddDocBrokerEntryPage(IWorkbench workbench, IStructuredSelection selection) {
@@ -52,6 +67,21 @@ public class AddDocBrokerEntryPage extends WizardPage implements Listener{
 	    portText = new Text(composite, SWT.BORDER|SWT.MULTI);
 	    portText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	    portText.setEditable(true);
+	  
+	    new Label (composite, SWT.NONE).setText(Constants.lblGlobalRegRepository);
+	    globalRegRepositoryText = new Text(composite, SWT.BORDER|SWT.MULTI);
+	    globalRegRepositoryText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	    globalRegRepositoryText.setEditable(true);
+
+	    new Label (composite, SWT.NONE).setText(Constants.lblGlobalRegUsername);
+	    globalRegUsernameText = new Text(composite, SWT.BORDER|SWT.MULTI);
+	    globalRegUsernameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	    globalRegUsernameText.setEditable(true);
+	    
+	    new Label (composite, SWT.NONE).setText(Constants.lblGlobalRegPassword);
+	    globalRegPasswordText = new Text(composite, SWT.BORDER|SWT.MULTI);
+	    globalRegPasswordText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	    globalRegPasswordText.setEditable(true);
 	    
 	    setControl(composite);
 	    addListeners();
@@ -60,9 +90,15 @@ public class AddDocBrokerEntryPage extends WizardPage implements Listener{
 	private void addListeners(){		
 		hostText.addListener(SWT.KeyUp, this);
 		portText.addListener(SWT.KeyUp, this);
+		globalRegRepositoryText.addListener(SWT.KeyUp, this);
+		globalRegUsernameText.addListener(SWT.KeyUp, this);
+		globalRegPasswordText.addListener(SWT.KeyUp, this);
 		
 		hostText.addListener(SWT.KeyDown, this);
 		portText.addListener(SWT.KeyDown, this);
+		globalRegRepositoryText.addListener(SWT.KeyDown, this);
+		globalRegUsernameText.addListener(SWT.KeyDown, this);
+		globalRegPasswordText.addListener(SWT.KeyDown, this);
 	}
 	
 
@@ -70,12 +106,31 @@ public class AddDocBrokerEntryPage extends WizardPage implements Listener{
 		if (event.type==SWT.KeyDown && event.keyCode==SWT.TAB){
 			hostText.setText(hostText.getText().trim());
 			portText.setText(portText.getText().trim());
+			globalRegRepositoryText.setText(globalRegRepositoryText.getText().trim());
+			globalRegUsernameText.setText(globalRegUsernameText.getText().trim());
+			globalRegPasswordText.setText(globalRegPasswordText.getText().trim());
+			
 			if (hostText.isFocusControl()){
 				portText.forceFocus();
 				portText.setSelection(portText.getText().length());
 			}else{
-				hostText.forceFocus();
-				hostText.setSelection(hostText.getText().length());
+				if (portText.isFocusControl()){
+					globalRegRepositoryText.forceFocus();
+					globalRegRepositoryText.setSelection(globalRegRepositoryText.getText().length());
+				}else{
+					if (globalRegRepositoryText.isFocusControl()){
+						globalRegUsernameText.forceFocus();
+						globalRegUsernameText.setSelection(globalRegUsernameText.getText().length());
+					}else{
+						if (globalRegUsernameText.isFocusControl()){
+							globalRegPasswordText.forceFocus();
+							globalRegPasswordText.setSelection(globalRegPasswordText.getText().length());
+						}else{
+							hostText.forceFocus();
+							hostText.setSelection(hostText.getText().length());
+						}
+					}
+				}
 			}
 			event.doit=false;
 		}else{
